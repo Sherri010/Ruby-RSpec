@@ -1,7 +1,6 @@
 require_relative "../models/Dog"
 
  describe Dog do
-  subject(:dog) {Dog.new}
   describe "::new" do
     it "initializes a new dog" do
       dog = Dog.new
@@ -21,6 +20,26 @@ require_relative "../models/Dog"
        dog.hunger_level = 10
        expect(dog.hunger_level).to eq(10)
     end
+  end
+
+  describe "# eat" do
+    context "the dog is hungry" do
+       dog = Dog.new
+        dog.hunger_level =10
+        it "lowe the hunger level" do
+          dog.eat
+          expect(dog.hunger_level).to eq(9)
+        end
+      end
+      context "not hungry" do
+         dog = Dog.new
+        dog.hunger_level = 0
+        it "never sets negative" do
+          dog.eat
+          expect(dog.hunger_level).to be >= 0
+       end
+    end
+
   end
 
 end
